@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi hobby: fútbol amateur | Luis Rocha Leyva</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f0f5f2; color: #1b3025; line-height: 1.7; }
+        header { background: #174b35; color: white; text-align: center; padding: 58px 20px 45px; }
+        header h1 { font-size: 2.6rem; margin: 0 0 8px; }
+        header p { font-size: 1.15rem; margin: 0; color: #d6eee0; }
+        main { max-width: 850px; margin: 35px auto; padding: 0 20px; }
+        section { background: white; border-radius: 14px; padding: 24px 30px; margin-bottom: 22px; box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+        h2 { color: #17613e; margin-top: 0; border-bottom: 2px solid #d6eadc; padding-bottom: 9px; }
+        ul { padding-left: 24px; }
+        li { margin: 8px 0; }
+        .frase { background: #e0f0e5; border-left: 5px solid #238354; padding: 16px 20px; border-radius: 6px; font-weight: bold; }
+        footer { background: #174b35; color: white; text-align: center; padding: 18px; margin-top: 35px; }
+        .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+        button { background: #17613e; color: white; border: 0; padding: 11px 16px; border-radius: 8px; cursor: pointer; font-size: 1rem; }
+        button:hover { background: #238354; }
+        .counter { font-size: 2rem; font-weight: bold; color: #17613e; margin: 10px 0; }
+        .status { min-height: 1.5em; }
+        body.dark { background: #15241c; color: #e6f3e9; }
+        body.dark section { background: #253c2e; }
+        body.dark h2, body.dark .counter { color: #9ce0b2; }
+        body.dark .frase { background: #345b42; }
+        @media (max-width: 600px) { header h1 { font-size: 2rem; } section { padding: 20px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mi hobby: el fútbol amateur</h1>
+        <p>Luis Rocha Leyva</p>
+    </header>
+    <main>
+        <section>
+            <h2>Mi pasión por el fútbol</h2>
+            <p>Uno de mis hobbies favoritos es jugar fútbol a nivel amateur. Me gusta porque puedo hacer ejercicio, divertirme y compartir tiempo con mis compañeros.</p>
+        </section>
+        <section>
+            <h2>¿Por qué me gusta el fútbol?</h2>
+            <p>El fútbol es un deporte que me motiva a mejorar constantemente. Cada partido es una oportunidad para aprender, trabajar en equipo y disfrutar de la competencia.</p>
+        </section>
+        <section>
+            <h2>Lo que más disfruto</h2>
+            <ul>
+                <li>Jugar partidos con mi equipo.</li>
+                <li>Entrenar y mejorar mis habilidades.</li>
+                <li>Convivir con mis amigos.</li>
+                <li>Celebrar los logros del equipo.</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Lo que el fútbol me ha enseñado</h2>
+            <p>Practicar fútbol amateur me ha enseñado la importancia de la disciplina, la constancia, el respeto y el trabajo en equipo. Para mí, lo más importante es disfrutar cada partido y seguir mejorando.</p>
+            <p class="frase">El fútbol no solo es competir: también es aprender y disfrutar cada momento.</p>
+        </section>
+        <section>
+            <h2>Mi contador de goles</h2>
+            <p>Esta sección usa JavaScript para llevar la cuenta de los goles que marco en mis partidos amateur.</p>
+            <p>Goles registrados:</p>
+            <p id="goles" class="counter" aria-live="polite">0</p>
+            <div class="controls">
+                <button type="button" id="sumar">+ Agregar gol</button>
+                <button type="button" id="restar">- Quitar gol</button>
+                <button type="button" id="reiniciar">Reiniciar</button>
+            </div>
+            <p id="mensaje" class="status" aria-live="polite">¡Listo para el próximo partido!</p>
+        </section>
+        <section>
+            <h2>Personaliza la página</h2>
+            <p>Haz clic en el botón para cambiar entre modo claro y oscuro.</p>
+            <button type="button" id="tema" aria-pressed="false">Activar modo oscuro</button>
+        </section>
+    </main>
+    <footer>Mi sitio web con HTML, CSS y JavaScript · Luis Rocha Leyva</footer>
+    <script>
+        let goles = 0;
+        const marcador = document.getElementById('goles');
+        const mensaje = document.getElementById('mensaje');
+
+        function actualizarMarcador() {
+            marcador.textContent = goles;
+            mensaje.textContent = goles === 0
+                ? '¡Listo para el próximo partido!'
+                : `¡Llevas ${goles} ${goles === 1 ? 'gol registrado' : 'goles registrados'}!`;
+        }
+
+        document.getElementById('sumar').addEventListener('click', function () {
+            goles++;
+            actualizarMarcador();
+        });
+        document.getElementById('restar').addEventListener('click', function () {
+            if (goles > 0) goles--;
+            actualizarMarcador();
+        });
+        document.getElementById('reiniciar').addEventListener('click', function () {
+            goles = 0;
+            actualizarMarcador();
+        });
+        document.getElementById('tema').addEventListener('click', function () {
+            const oscuro = document.body.classList.toggle('dark');
+            this.textContent = oscuro ? 'Activar modo claro' : 'Activar modo oscuro';
+            this.setAttribute('aria-pressed', String(oscuro));
+        });
+    </script>
+</body>
+</html>
